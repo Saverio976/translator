@@ -9,7 +9,7 @@ const (
 	api_3_part = "&dt=t&q="
 )
 
-struct Context {
+pub struct Context {
 pub:
 	src_language string
 	dest_language string
@@ -18,6 +18,8 @@ pub mut:
 	dest_text string
 }
 
+// translate will set Context.dest_text and return 0 if all is ok, else it will 
+// juste return -1
 pub fn (mut c Context) translate() int {
 	final_url := api_url + c.src_language + api_2_part + c.dest_language + api_3_part + urllib.query_escape(c.src_text)
 	text := http.get_text(final_url)
@@ -28,6 +30,8 @@ pub fn (mut c Context) translate() int {
 	return 0
 }
 
+// translate_x_to_y will create the Context and return it with the dest_text 
+// set if Context.translate returns 0
 pub fn translate_x_to_y(src_lng string, dest_lng string, text string) ?Context {
 	mut context := Context{
 		src_language: src_lng
