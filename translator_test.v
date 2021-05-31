@@ -13,5 +13,5 @@ fn test_context_translate() {
 		src_text: 'Hi'
 	}
 	assert context.translate() == 0
-	assert context.dest_text.to_lower() == 'salut' 
+	assert context.dest_text.to_lower() == 'salut'
 }
