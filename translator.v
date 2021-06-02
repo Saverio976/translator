@@ -3,43 +3,69 @@ module translator
 import net.http
 import net.urllib
 
-const (
-	api_url    = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl='
-	api_2_part = '&tl='
-	api_3_part = '&dt=t&q='
-)
-
-pub struct Context {
-pub:
-	src_language  string
-	dest_language string
-	src_text      string
-pub mut:
-	dest_text string
-}
-
-// translate will set Context.dest_text and return 0 if all is ok, else it will
-// juste return -1
-pub fn (mut c Context) translate() int {
-	final_url := api_url + c.src_language + 
-		api_2_part + c.dest_language + 
-		api_3_part + urllib.query_escape(c.src_text)
-	text := http.get_text(final_url)
-	if text == '' {
-		return -1
+// translate_x_to_y create a ContextTranslator with src_lng & dest_lng & text
+// and return translated string if the translation update the ContextTranslator.dest_text,
+// else return an empty string
+pub fn translate_text(src_lng string, dest_lng string, text string) string {
+	src_language := supported_language('mymemory', src_lng)
+	dest_language := supported_language('mymemory', dest_lng)
+	if src_language == '' || dest_language == '' {
+		return ''
 	}
-	c.dest_text = text.split('","')[0].trim_left('["')
-	return 0
-}
-
-// translate_x_to_y will create the Context and return it with the dest_text
-// already set if Context.translate returns 0
-pub fn translate_x_to_y(src_lng string, dest_lng string, text string) ?Context {
-	mut context := Context{
-		src_language: src_lng
-		dest_language: dest_lng
+	mut context := ContextTranslator{
+		src_language: src_language
+		dest_language: dest_language
 		src_text: text
 	}
-	is_ok := context.translate()
-	return if is_ok == 0 { context } else { none }
+	mut is_ok := context.mymemory_translate()
+	if is_ok == 0 {
+		return context.dest_text
+	}
+	is_ok = context.google_translate()
+	if is_ok == 0 {
+		return context.dest_text
+	} else {
+		return ''
+	}
+}
+
+// translate_word use linguee and get the first result, return this result
+// else, try to using mymemory to translate, then google, and result an
+// empty string if can't get any response
+// https://www.linguee.com/{source}-{target}/translation/{word}.html
+pub fn translate_word(src_lng string, dest_lng string, word string) string {
+	if word.split_into_lines().len != 1 {
+		return translate_text(src_lng, dest_lng, word) // word is a sentence(s)
+	}
+	src_language := supported_language('linguee', src_lng)
+	dest_language := supported_language('linguee', dest_lng)
+	if src_language == '' || dest_language == '' {
+		return ''
+	}
+	final_url := linguee_api_url[0] + src_language + linguee_api_url[1] + dest_language +
+		linguee_api_url[2] + urllib.query_escape(word) + linguee_api_url[3]
+	mut text := http.get_text(final_url)
+	if text == '' {
+		return ''
+	}
+	start_i := text.index("class='tag_trans'") or { -1 }
+	if start_i == -1 {
+		return translate_text(src_lng, dest_lng, word)
+	}
+	mut start := 5 + text.index_after("lid='", start_i)
+	mut end := text.index_after("'>", start)
+	text = text[start..end]
+	start = 1 + text.index(':') or { -1 }
+	if start == -1 {
+		return translate_text(src_lng, dest_lng, word)
+	}
+	end = text.index('#') or { -1 }
+	if end == -1 {
+		return translate_text(src_lng, dest_lng, word)
+	}
+	final_text := text[start..end]
+	if final_text == '' {
+		return translate_text(src_lng, dest_lng, word)
+	}
+	return final_text
 }
