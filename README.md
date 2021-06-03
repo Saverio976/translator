@@ -1,8 +1,78 @@
 # v translator
 
-v module to translate string (uses google, mymemory and linguee)
+v module to translate string or word (uses google, mymemory and linguee)
 
-# module translator
+## example
+
+translate a word
+```v
+import translator
+
+fn main(){
+	english_word := 'hello'
+	italian_word := translator.translate_word('en', 'it', english_word)
+	println('en : $english_word')
+	println('fr : $italian_word')
+}
+```
+
+translate sentence
+```v
+import translator
+
+fn main(){
+	english_text := 'hello world !'
+	french_text := translator.translate_text('en', 'fr', english_text)
+	println('en : $english_text')
+	println('fr : $french_text')
+}
+```
+
+use the translator.ContextTranslator to choose which online translator you want
+```v
+import translator
+
+fn main(){
+	mut context := translator.ContextTranslator{
+		src_language: 'en'
+		dest_language: 'fr'
+		src_text: 'hello world'
+	}
+	// using google
+	if context.google_translate() != 0 {
+		println('the text is not translated')
+	}
+	else {
+		println('$context.src_language : $context.src_text')
+		println('$context.dest_language : $context.dest_text')
+	}
+	// using mymemory
+	if context.mymemory_translate() != 0 {
+		println('the text is not translated')
+	}
+	else {
+		println('$context.src_language : $context.src_text')
+		println('$context.dest_language : $context.dest_text')
+	}
+	// using linguee
+	context = translator.ContextTranslator{
+		src_language: 'en'
+		dest_language: 'it'
+		src_text: 'hi' 		// linguee translate only word
+							// if there is more than one word, it will use 
+							// internaly another method (mymemory , google)
+	}
+	if context.linguee_translate() != 0 {
+		println('the word is not translated')
+	}
+	else {
+		println('$context.src_language : $context.src_text')
+		println('$context.dest_language : $context.dest_text')
+	}
+}
+```
+
+# module 
 
 ## Contents
 - [translate_text](#translate_text)
@@ -67,4 +137,22 @@ fn (mut c ContextTranslator) linguee_translate() int
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 2 Jun 2021 13:35:42
+#### Powered by vdoc. Generated on: 3 Jun 2021 17:26:40
+
+# tree
+
+"."
+├── "assets"
+│   └── "DEFAULT_README.md"
+├── "context_translator.v"
+├── "language.v"
+├── "LICENSE"
+├── "Makefile"
+├── "README.md"
+├── "translator_test.v"
+├── "translator.v"
+├── "url_endpoint.v"
+└── "v.mod"
+
+1 directory, 10 files
+
