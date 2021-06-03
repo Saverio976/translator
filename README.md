@@ -137,13 +137,21 @@ fn (mut c ContextTranslator) linguee_translate() int
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 3 Jun 2021 17:39:52
+#### Powered by vdoc. Generated on: 3 Jun 2021 19:38:40
 
 # tree
 
 "."
 ├── "assets"
+│   ├── "cli-translate-example.v"
 │   └── "DEFAULT_README.md"
+├── "html_entity"
+│   ├── "generate"
+│   │   ├── "entities.json"
+│   │   ├── "gen_entitytable.v"
+│   │   └── "README.md"
+│   ├── "html_entity_test.v"
+│   └── "html_entity.v"
 ├── "context_translator.v"
 ├── "language.v"
 ├── "LICENSE"
@@ -154,5 +162,5 @@ fn (mut c ContextTranslator) linguee_translate() int
 ├── "url_endpoint.v"
 └── "v.mod"
 
-1 directory, 10 files
+3 directories, 16 files
 

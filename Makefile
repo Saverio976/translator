@@ -14,7 +14,7 @@ doc:
 end:
 	echo '# tree' >> $(MAIN_README)
 	echo  >> $(MAIN_README)
-	tree -a -I .git\* -Q . >> $(MAIN_README)
+	tree -a -I .git\* -Q --dirsfirst . >> $(MAIN_README)
 	echo  >> $(MAIN_README)
 
 clean:
