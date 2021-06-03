@@ -1,4 +1,5 @@
 module translator
+import html_entity { htmlentity_to_string }
 
 import net.http
 import net.urllib
@@ -67,5 +68,5 @@ pub fn translate_word(src_lng string, dest_lng string, word string) string {
 	if final_text == '' {
 		return translate_text(src_lng, dest_lng, word)
 	}
-	return final_text
+	return htmlentity_to_string(final_text)
 }

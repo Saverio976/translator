@@ -1,4 +1,5 @@
 module translator
+import html_entity { htmlentity_to_string }
 
 import net.http
 import net.urllib
@@ -38,7 +39,7 @@ pub fn (mut c ContextTranslator) mymemory_translate() int {
 	if final_text.starts_with(mymemory_warning){
 		return -1
 	}
-	c.dest_text = final_text
+	c.dest_text = htmlentity_to_string(final_text)
 	return 0
 }
 
@@ -58,7 +59,7 @@ pub fn (mut c ContextTranslator) google_translate() int {
 	if text == '' {
 		return -1
 	}
-	c.dest_text = text.split('","')[0].trim_left('["')
+	c.dest_text = htmlentity_to_string(text.split('","')[0].trim_left('["'))
 	return 0
 }
 
