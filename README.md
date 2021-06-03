@@ -137,10 +137,11 @@ fn (mut c ContextTranslator) linguee_translate() int
 
 [[Return to contents]](#Contents)
 
-#### Powered by vdoc. Generated on: 3 Jun 2021 19:38:40
+#### Powered by vdoc. Generated on: 3 Jun 2021 19:51:01
 
 # tree
 
+```
 "."
 ├── "assets"
 │   ├── "cli-translate-example.v"
@@ -163,4 +164,5 @@ fn (mut c ContextTranslator) linguee_translate() int
 └── "v.mod"
 
 3 directories, 16 files
+```
 
