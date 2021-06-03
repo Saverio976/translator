@@ -1,6 +1,6 @@
 module translator
 
-const (
+pub const (
 	google_api_url   = [
 		'https://translate.googleapis.com/translate_a/single?client=gtx&sl=',
 		'&tl=',

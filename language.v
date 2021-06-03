@@ -1,6 +1,6 @@
 module translator
 
-const (
+pub const (
 	google_lang = map{
 		'af':    'afrikaans'
 		'sq':    'albanian'
