@@ -6,6 +6,8 @@ import term
 const (
 	title = 'TRANSLATE'
 	help_data = [
+		'a cli interface to translate text, wrapper of saverio.translator',
+		'a module to translate via online api / web scrapping for linguee'
 		'',
 		'translate <source-language> <dest-language> <some text or sentence>',
 		'	PARAMS :'
