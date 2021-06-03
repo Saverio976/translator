@@ -3,7 +3,6 @@ DEFAULT_README=./assets/DEFAULT_README.md
 
 build_readme: introduction	doc	end
 
-
 introduction:	clean
 	cat $(DEFAULT_README) >> $(MAIN_README)
 	echo  >> $(MAIN_README)

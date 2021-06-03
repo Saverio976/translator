@@ -12,7 +12,7 @@ fn main(){
 	english_word := 'hello'
 	italian_word := translator.translate_word('en', 'it', english_word)
 	println('en : $english_word')
-	println('fr : $italian_word')
+	println('it : $italian_word')
 }
 ```
 
@@ -58,9 +58,9 @@ fn main(){
 	context = translator.ContextTranslator{
 		src_language: 'en'
 		dest_language: 'it'
-		src_text: 'hi' 		// linguee translate only word
-							// if there is more than one word, it will use 
-							// internaly another method (mymemory , google)
+		src_text: 'hello' 		// linguee translate only word
+								// if there is more than one word, it will use 
+								// internaly another method (mymemory , google)
 	}
 	if context.linguee_translate() != 0 {
 		println('the word is not translated')
