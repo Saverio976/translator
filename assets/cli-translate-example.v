@@ -53,6 +53,10 @@ fn supported_language() {
 
 fn main() {
 	term.set_terminal_title( title.to_lower() )
+	if os.args.len == 1 {
+		help()
+		return
+	}
 	match os.args[1] {
 		'--help' {
 			help()
@@ -62,12 +66,11 @@ fn main() {
 			supported_language()
 			return
 		}
-		else {
-			if os.args.len < 4 {
-				help()
-				return
-			}
-		}
+		else {}
+	}
+	if os.args.len < 4 {
+		help()
+		return
 	}
 	mut text := ''
 	for value in os.args[3..] {
