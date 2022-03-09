@@ -1,7 +1,7 @@
 module translator
 
 pub const (
-	google_lang = map{
+	google_lang = {
 		'af':    'afrikaans'
 		'sq':    'albanian'
 		'am':    'amharic'
@@ -111,7 +111,7 @@ pub const (
 		'he':    'Hebrew'
 	}
 	mymemory_lang = &google_lang
-	linguee_lang  = map{
+	linguee_lang  = {
 		'maltese':    'mt'
 		'english':    'en'
 		'german':     'de'
