@@ -1,6 +1,6 @@
 module translator
-import html_entity { htmlentity_to_string }
 
+import html_entity { htmlentity_to_string }
 import net.http
 import net.urllib
 

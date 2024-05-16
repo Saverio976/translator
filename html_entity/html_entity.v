@@ -1,6 +1,6 @@
 module html_entity
 
-pub const html_replacement = map{
+pub const html_replacement = {
 	'&#198;':                            'Æ'
 	'&AElig;':                           'Æ'
 	'&#38;':                             '&'
@@ -3643,7 +3643,7 @@ pub const html_replacement = map{
 pub fn htmlentity_to_string(data string) string {
 	mut data_transform := data
 	if data.contains('&') {
-		for key, value in html_replacement {
+		for key, value in html_entity.html_replacement {
 			data_transform = data_transform.replace(key, value)
 		}
 	}

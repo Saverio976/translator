@@ -1,12 +1,10 @@
 module translator
-import html_entity { htmlentity_to_string }
 
+import html_entity { htmlentity_to_string }
 import net.http
 import net.urllib
 
-const (
-	mymemory_warning = 'MYMEMORY WARNING: YOU USED ALL AVAILABLE FREE TRANSLATIONS FOR TODAY. NEXT AVAILABLE IN'
-)
+const mymemory_warning = 'MYMEMORY WARNING: YOU USED ALL AVAILABLE FREE TRANSLATIONS FOR TODAY. NEXT AVAILABLE IN'
 
 // ContextTranslator used for function and the method translate
 pub struct ContextTranslator {
@@ -36,13 +34,12 @@ pub fn (mut c ContextTranslator) mymemory_translate() int {
 	start := 17 + text.index('translatedText') or { return -1 }
 	end := text.index_after('","', start)
 	final_text := text[start..end]
-	if final_text.starts_with(mymemory_warning){
+	if final_text.starts_with(translator.mymemory_warning) {
 		return -1
 	}
 	c.dest_text = htmlentity_to_string(final_text)
 	return 0
 }
-
 
 // translate with google. return 0 if ContextTranslator.dest_text is updated,
 // else return -1
