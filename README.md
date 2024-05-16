@@ -17,8 +17,8 @@ import saverio976.translator
 fn main(){
 	english_word := 'hello'
 	italian_word := translator.translate_word('en', 'it', english_word)
-	println('en : $english_word')
-	println('it : $italian_word')
+	println('en : ${english_word}')
+	println('it : ${italian_word}')
 }
 ```
 
@@ -29,8 +29,8 @@ import saverio976.translator
 fn main(){
 	english_text := 'hello world !'
 	french_text := translator.translate_text('en', 'fr', english_text)
-	println('en : $english_text')
-	println('fr : $french_text')
+	println('en : ${english_text}')
+	println('fr : ${french_text}')
 }
 ```
 
@@ -49,16 +49,16 @@ fn main(){
 		println('the text is not translated')
 	}
 	else {
-		println('$context.src_language : $context.src_text')
-		println('$context.dest_language : $context.dest_text')
+		println('${context.src_language} : ${context.src_text}')
+		println('${context.dest_language} : ${context.dest_text}')
 	}
 	// using mymemory
 	if context.mymemory_translate() != 0 {
 		println('the text is not translated')
 	}
 	else {
-		println('$context.src_language : $context.src_text')
-		println('$context.dest_language : $context.dest_text')
+		println('${context.src_language} : ${context.src_text}')
+		println('${context.dest_language} : ${context.dest_text}')
 	}
 	// using linguee
 	context = translator.ContextTranslator{
@@ -72,8 +72,8 @@ fn main(){
 		println('the word is not translated')
 	}
 	else {
-		println('$context.src_language : $context.src_text')
-		println('$context.dest_language : $context.dest_text')
+		println('${context.src_language} : ${context.src_text}')
+		println('${context.dest_language} : ${context.dest_text}')
 	}
 }
 ```
