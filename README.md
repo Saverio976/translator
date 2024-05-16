@@ -2,11 +2,17 @@
 
 v module to translate string or word (uses google, mymemory and linguee)
 
-## example
+## Install
+
+```
+v install Saverio976.translator
+```
+
+## Example
 
 translate a word
 ```v
-import translator
+import saverio976.translator
 
 fn main(){
 	english_word := 'hello'
@@ -18,7 +24,7 @@ fn main(){
 
 translate sentence
 ```v
-import translator
+import saverio976.translator
 
 fn main(){
 	english_text := 'hello world !'
@@ -30,7 +36,7 @@ fn main(){
 
 use the translator.ContextTranslator to choose which online translator you want
 ```v
-import translator
+import saverio976.translator
 
 fn main(){
 	mut context := translator.ContextTranslator{
